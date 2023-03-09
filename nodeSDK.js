@@ -51,15 +51,15 @@ const _tracerConfig = {
   idGenerator: new AWSXRayIdGenerator(),
 };
 
-const _metricReader = new PeriodicExportingMetricReader({
-  exporter: new OTLPMetricExporter(),
-  exportIntervalMillis: 1000,
-});
+// const _metricReader = new PeriodicExportingMetricReader({
+//   exporter: new OTLPMetricExporter(),
+//   exportIntervalMillis: 1000,
+// });
 
-const nodeSDKBuilder = async () => {
+module.exports = nodeSDKBuilder = async () => {
   const sdk = new opentelemetry.NodeSDK({
     textMapPropagator: new AWSXRayPropagator(),
-    metricReader: _metricReader,
+    //    metricReader: _metricReader,
     instrumentations: instrumentations,
     resource: _resource,
     spanProcessor: _spanProcessor,
@@ -71,7 +71,7 @@ const nodeSDKBuilder = async () => {
     detectors: [awsEcsDetector, awsEc2Detector],
   });
 
-  const tracerProvider = new NodeTracerProvider({ resource });
+  //const tracerProvider = new NodeTracerProvider({ resource });
   // this enables the API to record telemetry
   await sdk.start();
   // gracefully shut down the SDK on process exit
