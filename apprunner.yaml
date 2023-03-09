@@ -7,8 +7,8 @@ build:
       - npm install
     post-build:
   env:
-    - name: MY_VAR_EXAMPLE
-      value: "example"
+     - name: APP_PORT
+      value: 8080
 run:
   runtime-version: 12.21.0
   command: node --require './nodeSDK.js' index.js
