@@ -1,10 +1,10 @@
 const express = require("express");
 const fetch = require("node-fetch");
-//import { nodeSDKBuilder } from "./nodeSDK";
+const nodeSDKBuilder = require("./nodeSDK");
 var app;
 
 app = express();
-//nodeSDKBuilder().then(() => {});
+nodeSDKBuilder().then(() => {});
 
 app.listen(8080, () => {
   console.log("rodou na porta", 8080);
