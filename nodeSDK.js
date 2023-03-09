@@ -37,11 +37,11 @@ const _resource = Resource.default().merge(
 //AWS
 const _traceExporter = new OTLPTraceExporter();
 const instrumentations = [
-      new HttpInstrumentation(),
-      new AwsInstrumentation({
-        suppressInternalInstrumentation: true,
-      }),
-    ],
+  new HttpInstrumentation(),
+  new AwsInstrumentation({
+    suppressInternalInstrumentation: true,
+  }),
+];
 
 const _spanProcessor = new BatchSpanProcessor(_traceExporter);
 
