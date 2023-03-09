@@ -15,6 +15,9 @@ const { HttpInstrumentation } = require("@opentelemetry/instrumentation-http");
 const { AwsInstrumentation } = require("opentelemetry-instrumentation-aws-sdk");
 const { PeriodicExportingMetricReader } = require("@opentelemetry/sdk-metrics");
 const {
+  getNodeAutoInstrumentations,
+} = require("@opentelemetry/auto-instrumentations-node");
+const {
   OTLPMetricExporter,
 } = require("@opentelemetry/exporter-metrics-otlp-grpc");
 const {
@@ -28,7 +31,18 @@ const _resource = Resource.default().merge(
     [SemanticResourceAttributes.SERVICE_NAME]: "js-sample-app",
   })
 );
-const _traceExporter = new OTLPTraceExporter();
+//console
+const _traceExporter = new opentelemetry.tracing.ConsoleSpanExporter();
+const instrumentations = [getNodeAutoInstrumentations()];
+//AWS
+//const _traceExporter = new OTLPTraceExporter();
+// const instrumentations = [
+//       new HttpInstrumentation(),
+//       new AwsInstrumentation({
+//         suppressInternalInstrumentation: true,
+//       }),
+//     ],
+
 const _spanProcessor = new BatchSpanProcessor(_traceExporter);
 
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
@@ -46,12 +60,7 @@ const nodeSDKBuilder = async () => {
   const sdk = new opentelemetry.NodeSDK({
     textMapPropagator: new AWSXRayPropagator(),
     metricReader: _metricReader,
-    instrumentations: [
-      new HttpInstrumentation(),
-      new AwsInstrumentation({
-        suppressInternalInstrumentation: true,
-      }),
-    ],
+    instrumentations: instrumentations,
     resource: _resource,
     spanProcessor: _spanProcessor,
     traceExporter: _traceExporter,

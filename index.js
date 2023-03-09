@@ -1,5 +1,5 @@
 const express = require("express");
-//const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 //import { nodeSDKBuilder } from "./nodeSDK";
 var app;
 
@@ -14,9 +14,9 @@ app.get("/", function (req, res) {
   res.send("hello world");
 });
 
-// app.get("/route", async function (req, res) {
-//   const cep = await fetch("https://viacep.com.br/ws/41320010/json").then(
-//     (data) => data.json()
-//   );
-//   res.send({ cep: cep });
-// });
+app.get("/route", async function (req, res) {
+  const cep = await fetch("https://viacep.com.br/ws/41320010/json").then(
+    (data) => data.json()
+  );
+  res.send({ cep: cep });
+});
