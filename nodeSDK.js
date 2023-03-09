@@ -34,6 +34,7 @@ const _resource = Resource.default().merge(
 //console
 const _traceExporter = new opentelemetry.tracing.ConsoleSpanExporter();
 const instrumentations = [getNodeAutoInstrumentations()];
+
 //AWS
 // const _traceExporter = new OTLPTraceExporter();
 // const instrumentations = [
