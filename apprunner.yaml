@@ -10,7 +10,7 @@ build:
     - name: MY_VAR_EXAMPLE
       value: "example"
 run:
-  runtime-version: 16.x
+  runtime-version: 12.21.0
   command: node src/index.js
   network:
     port: 8080
