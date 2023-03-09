@@ -32,16 +32,16 @@ const _resource = Resource.default().merge(
   })
 );
 //console
-// const _traceExporter = new opentelemetry.tracing.ConsoleSpanExporter();
-// const instrumentations = [getNodeAutoInstrumentations()];
+const _traceExporter = new opentelemetry.tracing.ConsoleSpanExporter();
+const instrumentations = [getNodeAutoInstrumentations()];
 //AWS
-const _traceExporter = new OTLPTraceExporter();
-const instrumentations = [
-  new HttpInstrumentation(),
-  new AwsInstrumentation({
-    suppressInternalInstrumentation: true,
-  }),
-];
+//const _traceExporter = new OTLPTraceExporter();
+// const instrumentations = [
+//       new HttpInstrumentation(),
+//       new AwsInstrumentation({
+//         suppressInternalInstrumentation: true,
+//       }),
+//     ],
 
 const _spanProcessor = new BatchSpanProcessor(_traceExporter);
 
