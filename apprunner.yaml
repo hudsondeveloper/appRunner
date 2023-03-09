@@ -11,7 +11,8 @@ build:
       value: 8080
 run:
   runtime-version: 12.21.0
-  command: node --require './nodeSDK.js' index.js
+  #command: node --require './nodeSDK.js' index.js
+  command: node index.js
   network:
     port: 8080
     env: APP_PORT
