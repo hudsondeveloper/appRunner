@@ -6,8 +6,8 @@ var app;
 app = express();
 //nodeSDKBuilder().then(() => {});
 
-app.listen(process.env.APP_PORT || 3001, () => {
-  console.log("rodou na porta", process.env.APP_PORT || 3001);
+app.listen(process.env.APP_PORT || 8080, () => {
+  console.log("rodou na porta", process.env.APP_PORT || 8080);
 });
 // respond with "hello world" when a GET request is made to the homepage
 app.get("/", function (req, res) {
